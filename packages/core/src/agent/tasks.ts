@@ -487,7 +487,7 @@ export class TaskExecutor {
 
             const planImpl =
               planningModel.adapter.planning.kind === 'custom'
-                ? planningModel.adapter.planning.planFn
+                ? planningModel.adapter.planning.planner.plan
                 : genericXmlPlan;
 
             let planResult: Awaited<ReturnType<typeof planImpl>>;

@@ -1,6 +1,7 @@
 import { normalJsonParser } from '../service-caller/json';
 import { createLocateResultAdapter } from '../shared/model-locate-result/factory';
 import type { LocateResultAdapterDefinition } from '../shared/model-locate-result/types';
+import { resolveCustomPlanning } from '../workflows/planning/custom-planning';
 import { defaultExtractContentAndReasoning } from './chat-content';
 import type {
   ChatCompletionAdapter,
@@ -100,7 +101,7 @@ function resolvePlanning(
       defaultReplanningCycleLimit:
         planning.defaultReplanningCycleLimit ?? defaultReplanningCycleLimit,
       supportsActionDeepLocate: planning.supportsActionDeepLocate ?? false,
-      planFn: planning.planFn,
+      planner: resolveCustomPlanning(planning.planner),
     };
   }
 
